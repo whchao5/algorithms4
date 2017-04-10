@@ -14,6 +14,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 /*
 * ../algs4-data/m1.txt ../algs4-data/m2.txt ../algs4-data/m3.txt
+* yes
 * A A B B B C D E F F G H I I J N P Q Q Z
  */
 public class Multiway {
