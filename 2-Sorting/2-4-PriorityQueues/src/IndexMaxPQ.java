@@ -122,6 +122,7 @@ public class IndexMaxPQ<Key extends Comparable<Key>> {
 
         keys[i] =  key;
         swin(qp[i]);
+        sink(qp[i]);
     }
 
 
