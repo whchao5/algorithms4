@@ -44,7 +44,7 @@ public class IndexMaxPQ<Key extends Comparable<Key>> {
         return n == 0;
     }
 
-    // 索引在优先队列中
+    // 索引在优先队列中, 初始化 为 -1 return false, 以使用return turn
     public boolean contains(int i) {
         return qp[i] != -1;  // 不等, 队列一切都是变量, -1 返回 false,
     }
@@ -112,6 +112,18 @@ public class IndexMaxPQ<Key extends Comparable<Key>> {
         else
             return keys[i];
     }
+
+    /*
+    ** 更改与索引关联的键 {@code 我} 为指定的值。
+     */
+    public void changeKey(int i, Key key) {
+        if (!contains(i))
+            throw new NoSuchElementException("index is not in the priority queue");
+
+        keys[i] =  key;
+        swin(qp[i]);
+    }
+
 
     /******************************************************************************
     **  辅助 函数 比较 和 交换
