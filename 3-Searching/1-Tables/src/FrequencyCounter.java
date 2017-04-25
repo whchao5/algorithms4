@@ -23,7 +23,7 @@ public class FrequencyCounter {
 
         ST<String, Integer> st = new ST<String, Integer>();
 
-        while (arr.isEmpty()) {
+        while (!arr.isEmpty()) {
             String key = arr.readString();
             if (key.length() < minlen) {
                 continue;
@@ -37,7 +37,27 @@ public class FrequencyCounter {
             }
         }
 
-        StdOut.print(words);
+        String max = "";
+        st.put(max, 0);
 
+        for (String word : st.keys()) {
+            if (st.get(word) > st.get(max)) {
+                max = word;
+            }
+        }
+
+        for (String kes : st) {
+            StdOut.println(kes);
+        }
+        StdOut.println("------------------");
+
+//        for (String kess: st.keys()) {
+//            StdOut.println(kess);
+//        }
+
+
+        StdOut.println(max + " " + st.get(max));
+        StdOut.println("distinct = " + distinct);
+        StdOut.println("words    = " + words);
     }
 }
