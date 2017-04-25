@@ -7,7 +7,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class IndexMinPQ<Key extends Comparable<Key>> {
+public class  IndexMinPQ<Key extends Comparable<Key>> {
 
     private int maxN;   // PQ上的元素的最大数目
     private int n;      // number of elements on PQ
