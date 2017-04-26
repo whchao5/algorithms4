@@ -92,7 +92,6 @@ public class SequentialSearchST<Key, Value> {
     }
 
     private Node  delete(Node x, Key key) {
-
         if (x == null)
             return null;
 
