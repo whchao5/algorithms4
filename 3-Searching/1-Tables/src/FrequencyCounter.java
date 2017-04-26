@@ -1,15 +1,17 @@
-import edu.princeton.cs.algs4.ST;
+
+
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.ST;
 
 /**
+ * 文本 频率计数器
+ *
  * 符号表， 基于顺序查看 顺序搜索
  * 2017、4/22 23:12
  *
- * ../algs4-data/tinyTale.txt
+ * 2 ../algs4-data/tinyTale.txt
  */
-
-
 
 public class FrequencyCounter {
     private FrequencyCounter() {
@@ -38,7 +40,7 @@ public class FrequencyCounter {
         }
 
         String max = "";
-        st.put(max, 0);
+        st.put(max, 0);     // 设置默认值
 
         for (String word : st.keys()) {
             if (st.get(word) > st.get(max)) {
@@ -59,5 +61,6 @@ public class FrequencyCounter {
         StdOut.println(max + " " + st.get(max));
         StdOut.println("distinct = " + distinct);
         StdOut.println("words    = " + words);
+        StdOut.println(st.min());
     }
 }
