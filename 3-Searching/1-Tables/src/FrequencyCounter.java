@@ -3,6 +3,7 @@
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
+import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  * 文本 频率计数器
@@ -11,6 +12,8 @@ import edu.princeton.cs.algs4.ST;
  * 2017、4/22 23:12
  *
  * 2 ../algs4-data/tinyTale.txt
+ *
+ * 0 ../algs4-data/tale.txt
  */
 
 public class FrequencyCounter {
@@ -24,6 +27,8 @@ public class FrequencyCounter {
         In arr = new In(args[1]);
 
         ST<String, Integer> st = new ST<String, Integer>();
+
+        Stopwatch timer = new Stopwatch();
 
         while (!arr.isEmpty()) {
             String key = arr.readString();
@@ -39,6 +44,9 @@ public class FrequencyCounter {
             }
         }
 
+        double time = timer.elapsedTime();
+        StdOut.print(time);
+
         String max = "";
         st.put(max, 0);     // 设置默认值
 
@@ -48,9 +56,9 @@ public class FrequencyCounter {
             }
         }
 
-        for (String kes : st) {
-            StdOut.println(kes);
-        }
+//        for (String kes : st) {
+//            StdOut.println(kes);
+//        }
         StdOut.println("------------------");
 
 //        for (String kess: st.keys()) {
