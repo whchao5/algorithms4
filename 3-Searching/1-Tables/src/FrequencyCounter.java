@@ -14,6 +14,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  * 2 ../algs4-data/tinyTale.txt
  *
  * 0 ../algs4-data/tale.txt
+ * 1 ../algs4-data/tale_two.txt
  */
 
 public class FrequencyCounter {
@@ -45,7 +46,7 @@ public class FrequencyCounter {
         }
 
         double time = timer.elapsedTime();
-        StdOut.print(time);
+        StdOut.println(time);
 
         String max = "";
         st.put(max, 0);     // 设置默认值

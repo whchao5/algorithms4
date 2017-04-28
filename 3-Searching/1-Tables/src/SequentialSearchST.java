@@ -12,7 +12,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  * <p>
  * 2 ../algs4-data/tinyTale.txt
  *
- * ../algs4-data/tale.txt        9.523
+ * ../algs4-data/tale.txt        9.523   26.841
  */
 public class SequentialSearchST<Key, Value> {
     private int n;
@@ -127,7 +127,12 @@ public class SequentialSearchST<Key, Value> {
 
         while (!arr.isEmpty()) {
             String key = arr.readString();
-            st.put(key, i++);
+
+            if (st.contains(key)) {
+                st.put(key, st.get(key) + 1);
+            } else {
+                st.put(key, 1);
+            }
         }
 
 //        st.delete("despair");
