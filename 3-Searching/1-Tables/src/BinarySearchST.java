@@ -1,5 +1,5 @@
 import edu.princeton.cs.algs4.*;
-
+import java.util.NoSuchElementException;
 /**
  * Created by HJKLI on 2017/4/27.
  * 顺序搜索 :  基于 二分查找， 优点，适应于小型问， 对于大型符号很好。
@@ -90,7 +90,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     /*
-    ** 删除
+    ** 删除 操作
      */
     public void delete(Key key) {
         if (key == null)
@@ -102,7 +102,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return;
         }
 
-        for (int j = i; j < n; i--) {
+        for (int j = i; j < n; j++) {
             keys[j] = keys[j+1];
             vals[j] = vals[j+1];
         }
@@ -113,6 +113,44 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     /*
+    ** 删除最大值
+     */
+    public void deleteMax() {
+        delete(max());
+    }
+
+
+    /*
+    ** 删除最小值
+     */
+    public void deleteMin() {
+        delete(min());
+    }
+
+    /******************************
+     * 命令符号表的方法。
+    ***************************** */
+    public Key min() {
+        if (isEmpty())
+            throw new NoSuchElementException("called min() with empty symbol table");
+
+        return keys[0];
+    }
+
+    public Key max() {
+        if (isEmpty())
+            throw new NoSuchElementException("called max() with empty symbol table");
+        return keys[n-1];
+    }
+
+    public Key select(int k) {
+        if (k >= size() || k < 0)
+            throw new IllegalArgumentException("called select() with empty invalid argument: " + k );
+        return keys[k];
+    }
+
+
+    /*
      *  二分查找
       */
     private int rank(Key key) {
@@ -121,7 +159,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         int hi = n - 1;
 
         while (lo <= hi) {
-            int mid = (hi + lo) / 2;
+            int mid = lo + (hi - lo) / 2;
             int cmp = key.compareTo(keys[mid]);
 
             if (cmp < 0)
