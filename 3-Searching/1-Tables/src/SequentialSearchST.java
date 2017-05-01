@@ -1,6 +1,8 @@
 
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  * time : 2017-4-26
@@ -9,6 +11,8 @@ import edu.princeton.cs.algs4.In;
  * SequentialSearchST
  * <p>
  * 2 ../algs4-data/tinyTale.txt
+ *
+ * ../algs4-data/tale.txt        9.523   26.841
  */
 public class SequentialSearchST<Key, Value> {
     private int n;
@@ -76,7 +80,7 @@ public class SequentialSearchST<Key, Value> {
             }
         }
 
-        Node first = new Node(key, value, this.first);
+        first = new Node(key, value, this.first);
         n++;
     }
 
@@ -91,37 +95,52 @@ public class SequentialSearchST<Key, Value> {
         first = delete(first, key);
     }
 
-    private Node  delete(Node x, Key key) {
+    private Node delete(Node x, Key key) {
+
         if (x == null)
             return null;
+
+        if (key.equals(x.key)) {
+            n--;
+            return x.next;
+        }
 
         x.next = delete(x.next, key);
         return x;
     }
 
-
-
-    /**
-     * 获取 最小的键
-     * @return
-     */
-    public Key min() {
-        return null;
-    }
-
-    /**
-     * 获取 最大的键
-     * @return
-     */
-    public Key max() {
-        return null;
+    // 这个cool, 讲 Node ,加入 queue 中 ,在输出
+    public Iterable<Key> keys() {
+        Queue<Key> queue = new Queue<Key>();
+        for (Node x = first; x != null; x = x.next)
+            queue.enqueue(x.key);
+        return queue;
     }
 
 
     public static void main(String[] args) {
         In arr = new In(args[0]);
+        int i = 1;
         SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
 
-        StdOut.println(st.get("fous"));
+        Stopwatch timer = new Stopwatch();
+
+        while (!arr.isEmpty()) {
+            String key = arr.readString();
+
+            if (st.contains(key)) {
+                st.put(key, st.get(key) + 1);
+            } else {
+                st.put(key, 1);
+            }
+        }
+
+//        st.delete("despair");
+
+        double time = timer.elapsedTime();
+        StdOut.print(time);
+
+//        for (String s : st.keys())
+//            StdOut.println(s + " " + st.get(s));
     }
 }
