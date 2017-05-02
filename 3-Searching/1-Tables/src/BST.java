@@ -10,7 +10,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  *
  */
 public class BST<Key extends Comparable<Key>, Value> {
-    public BST() {}
+    private Node root;
 
     private class Node {
         private Key key;
@@ -25,7 +25,45 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    public Value get() {
+    public BST() {}
 
+    public int size() {
+        if (root == null)  return 0;
+        else            return root.size;
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    public Value get(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to get() is null");
+        return get(root, key);
+    }
+
+    private Value get(Node x, Key key) {
+
+
+        return x.val;
+    }
+
+    public static void main(String[] args) {
+        In arr = new In(args[0]);
+        BST<String, Integer> st = new BST<String, Integer>();
+
+        Stopwatch timer = new Stopwatch();
+
+        while (!arr.isEmpty()) {
+            String key = arr.readString();
+//
+//            if (st.contains(key)) {
+//                st.put(key, st.get(key) + 1);
+//            } else {
+//                st.put(key, 1);
+//            }
+        }
+
+        double time = timer.elapsedTime();
+        StdOut.println(time);
     }
 }
