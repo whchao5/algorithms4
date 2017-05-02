@@ -1,16 +1,19 @@
 import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.Queue;
+
 import java.util.NoSuchElementException;
+
 /**
  * Created by HJKLI on 2017/4/27.
  * 顺序搜索 :  基于 二分查找， 优点，适应于小型问， 对于大型符号很好。
  * 数据结构是 条 有序数组， 查询从二分查找， 插入 二分法 后插入
  * <p>
  * Key extents Comparable<Key> 可实现 ·自然顺序·， 返回 1, 0, -1
- *
- *
+ * <p>
+ * <p>
  * ../algs4-data/tinyTale.txt
  * ../algs4-data/tale.txt
- *
+ * <p>
  * ../algs4-data/tale_two.txt
  */
 public class BinarySearchST<Key extends Comparable<Key>, Value> {
@@ -103,8 +106,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
 
         for (int j = i; j < n; j++) {
-            keys[j] = keys[j+1];
-            vals[j] = vals[j+1];
+            keys[j] = keys[j + 1];
+            vals[j] = vals[j + 1];
         }
 
         n--;
@@ -129,7 +132,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /******************************
      * 命令符号表的方法。
-    ***************************** */
+     ***************************** */
     public Key min() {
         if (isEmpty())
             throw new NoSuchElementException("called min() with empty symbol table");
@@ -140,12 +143,12 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     public Key max() {
         if (isEmpty())
             throw new NoSuchElementException("called max() with empty symbol table");
-        return keys[n-1];
+        return keys[n - 1];
     }
 
     public Key select(int k) {
         if (k >= size() || k < 0)
-            throw new IllegalArgumentException("called select() with empty invalid argument: " + k );
+            throw new IllegalArgumentException("called select() with empty invalid argument: " + k);
         return keys[k];
     }
 
@@ -188,12 +191,62 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         vals = ItemV;
     }
 
-//    public Iterable<Key> keys() {
-//        Queue<Key> queue = new Queue<Key>();
-//        for (int i = 0; i < n; i++) {
-//
-//        }
-//    }
+    /*
+    ** floor 小于等于 key 的最大值
+     */
+    public Key floor(Key key) {
+        if (key == null)
+            throw new IllegalArgumentException("argument to floor() is null");
+
+        int i = rank(key);
+        if (i < n && key.compareTo(keys[i]) == 0)
+            return keys[i];
+        if (i == 0)
+            return null;
+        else return keys[i - 1];
+
+    }
+
+
+    public Key ceiling(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
+        int i = rank(key);
+        if (i == n) return null;
+        else return keys[i];
+
+    }
+
+    /*
+    ** 遍历数据
+     */
+    public Iterable<Key> keys() {
+        return keys(min(), max());
+    }
+
+    private Iterable<Key> keys(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
+        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
+
+        Queue<Key> queue = new Queue<Key>();
+        if (lo.compareTo(hi) > 0) return queue;
+
+        for (int i = rank(lo); i < rank(hi); i++) {
+            queue.enqueue(keys[i]);
+        }
+        if (contains(hi))
+            queue.enqueue(keys[rank(hi)]);
+        return queue;
+    }
+
+    // 新的 keys , 视乎不是很好
+    public Iterable<Key> keys_two() {
+        Queue<Key> queue = new Queue<Key>();
+        for (int i = 0; i < size(); i++) {
+            queue.enqueue(keys[i]);
+        }
+        return queue;
+    }
+
 
     public static void main(String[] args) {
         In arr = new In(args[0]);
@@ -212,9 +265,15 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             }
         }
 
-        st.delete("belief");
+//        st.delete("belief");
 
         double time = timer.elapsedTime();
-        StdOut.print(time);
+        StdOut.println(time);
+
+//        for (String s : st.keys()) {
+//            StdOut.println(s + " " + st.get(s));
+//        }
+//
+//        StdOut.println(st.floor("despaiaee"));
     }
 }

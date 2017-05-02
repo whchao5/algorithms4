@@ -13,6 +13,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  * 2 ../algs4-data/tinyTale.txt
  *
  * ../algs4-data/tale.txt        9.523   26.841
+ * ../algs4-data/tale_two.txt
  */
 public class SequentialSearchST<Key, Value> {
     private int n;
@@ -138,7 +139,7 @@ public class SequentialSearchST<Key, Value> {
 //        st.delete("despair");
 
         double time = timer.elapsedTime();
-        StdOut.print(time);
+        StdOut.println(time);
 
 //        for (String s : st.keys())
 //            StdOut.println(s + " " + st.get(s));

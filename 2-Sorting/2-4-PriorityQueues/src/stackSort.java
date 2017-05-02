@@ -2,7 +2,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 
 /*
-** 堆排序
+** 堆排序, 用数组模拟 堆， 堆数据 大于两个
  */
 public class stackSort {
 
