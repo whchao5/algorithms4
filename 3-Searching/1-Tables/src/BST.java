@@ -9,6 +9,8 @@ import edu.princeton.cs.algs4.Stopwatch;
  * 二叉树 每个节点含有 一个键， 一个 值， 左右链接 和 节点计数器
  *
  *  ../algs4-data/tinyTale.txt
+ *  ../algs4-data/tale.txt
+ *  ../algs4-data/leipzig1M.txt
  */
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;
@@ -107,7 +109,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     /*
     * 输入 key 删除   32.2.42 应对大规模数据
-     */
+
     public void delete(Key key) {
         if (key == null)
             throw new IllegalArgumentException("argument to delete() is null");
@@ -125,13 +127,38 @@ public class BST<Key extends Comparable<Key>, Value> {
             x.left = delete(x.left, key);
         } else {
             // TODO 没写
-
-
         }
         return x;
+    }*/
+
+    /*
+    ** 返回符号表中的最小键
+     */
+    public Key min() {
+        Node item = min(root);
+        return  item.key;
     }
 
+    private Node min(Node x) {
+        if (x.left == null)
+            return x;
+        else
+            return min(x.left);
+    }
 
+    /*
+    ** 返回符号表中的最大键
+     */
+    public Key max() {
+        return  max(root).key;
+    }
+
+    private Node max(Node x) {
+        if (x.right == null)
+            return x;
+        else
+            return min(x.right);
+    }
 
 
     /*
@@ -155,5 +182,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         double time = timer.elapsedTime();
         StdOut.println(time);
+        StdOut.println(st.min());
+        StdOut.println(st.max());
     }
 }

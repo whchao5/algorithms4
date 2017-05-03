@@ -15,6 +15,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  *
  * 0 ../algs4-data/tale.txt
  * 1 ../algs4-data/tale_two.txt
+ * 3 ../algs4-data/leipzig1M.txt
  */
 
 public class FrequencyCounter {
@@ -68,8 +69,8 @@ public class FrequencyCounter {
 
 
         StdOut.println(max + " " + st.get(max));
-        StdOut.println("distinct = " + distinct);
-        StdOut.println("words    = " + words);
-        StdOut.println(st.min());
+        StdOut.println("distinct = " + distinct);  // 不同的单词数
+        StdOut.println("words    = " + words);      // 大于 length 的 单词数
+//        StdOut.println(st.min());
     }
 }
