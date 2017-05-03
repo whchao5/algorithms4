@@ -3,8 +3,11 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.NoSuchElementException;
 
-/**
+/*
  * Created by HJKLI on 2016/9/1.
+ *  链表式 栈  LIFO stack (linked list)
+ *
+ *  ../algs4-data/tobe.txt
  */
 public class LinkedStack<Item> {
     private Node first;
@@ -13,6 +16,11 @@ public class LinkedStack<Item> {
     private class Node {
         private Item item;
         private Node next;
+
+//        public  Node (Item item, Node n) {      // 这样写 也OK
+//            this.item = item;
+//            this.next = n;
+//        }
     }
 
     public LinkedStack() {
@@ -60,7 +68,7 @@ public class LinkedStack<Item> {
             else if (!data.isEmpty())
                 StdOut.println(data.pop() + " ");
         }
-        StdOut.println("(" + data.size() + " left on stack!");
+        StdOut.println("(" + data.size() + " left on stack! )");
 
         // 迭代
 //        for (String x : data) {

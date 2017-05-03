@@ -1,8 +1,14 @@
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdIn;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
  * Created by HJKLI on 2016/8/30.
+ *  链表 包
+ *
  */
 public class Bag<Item> implements Iterable<Item> {
     private Node<Item> first;    // beginning of bag

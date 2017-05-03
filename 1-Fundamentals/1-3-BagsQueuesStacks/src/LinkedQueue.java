@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Created by HJKLI on 2016/8/31.
- * 链表队列
+ * 链表队列  FIFO queue (linked list)
  */
 public class LinkedQueue<Item> implements Iterable<Item> {
     private int  n;
