@@ -160,6 +160,27 @@ public class BST<Key extends Comparable<Key>, Value> {
             return min(x.right);
     }
 
+    /*
+    ** 输入 排名， 放回 key 值
+     */
+    public Key select(int k) {
+        if (k < 0 || k >= size())
+            throw new IllegalArgumentException("called select() with invalid argument: " + k);
+        Node x = select(root, k);
+        return x.key;
+    }
+
+    private Node select(Node x, int k) {
+
+
+
+
+        return x;
+    }
+
+    /*
+    ** 输入 key值， 放回 排名
+     */
 
     /*
     ** 测试 查询
