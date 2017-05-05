@@ -3,6 +3,8 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stopwatch;
 
+import java.util.NoSuchElementException;
+
 /*
  * 二叉树 查找， 小 于的放 左 ， 大的放右,
  *
@@ -28,16 +30,17 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    public BST() {}
+    public BST() {
+    }
 
     public int size() {
-       return size(root);
+        return size(root);
     }
 
     // 重载 size 的数据
     private int size(Node x) {
-        if (x == null)  return 0;
-        else            return x.size;
+        if (x == null) return 0;
+        else return x.size;
     }
 
     public boolean isEmpty() {
@@ -66,14 +69,13 @@ public class BST<Key extends Comparable<Key>, Value> {
         int cmp = key.compareTo(x.key);
 
         if (cmp > 0) {
-            return  get(x.right, key);
+            return get(x.right, key);
         } else if (cmp < 0) {
             return get(x.left, key);
         } else {
             return x.val;
         }
     }
-
 
 
     /*
@@ -131,12 +133,49 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x;
     }*/
 
+
+    /*
+    ** floor 小于等于 key 的最大值
+    */
+    public Key floor(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
+        if (isEmpty()) throw new NoSuchElementException("called floor() with empty symbol table");
+
+        return floor(root, key).key;
+    }
+
+    private Node floor(Node x, Key key) {
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) return x;
+        if (cmp < 0) {
+            Node s = floor(x.left, key);         // 添加 left 最小处理
+            if (s != null)
+                return s;
+            else
+                return x;
+        }
+
+        Node t = floor(x.right, key);
+        if (t != null)
+            return t;
+        else
+            return x;
+    }
+
+//    private Node floor_two(Node x, Key key) {
+//        if (x == null) return null;
+//        int cmp = key.compareTo(x.key);
+//        if (cmp == 0) return x;
+//        if (cmp < 0) return floor_two(x.left, key);
+//    }
+
     /*
     ** 返回符号表中的最小键
      */
     public Key min() {
         Node item = min(root);
-        return  item.key;
+        return item.key;
     }
 
     private Node min(Node x) {
@@ -150,7 +189,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     ** 返回符号表中的最大键
      */
     public Key max() {
-        return  max(root).key;
+        return max(root).key;
     }
 
     private Node max(Node x) {
@@ -171,16 +210,38 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     private Node select(Node x, int k) {
-
-
-
-
-        return x;
+        if (x == null) return null;
+//        int t = size(x);
+        int t = size(x.left); // 验证 left 是否有值，
+        if (t > k)
+            return select(x.left, k);
+        else if (t < k)
+            return select(x.right, k - t - 1);  // size 只记录 向下的数量， 不记录在第几位， so, k - t -1
+        else
+            return x;
     }
 
     /*
-    ** 输入 key值， 放回 排名
+    ** 输入 key值， 返回 排名
      */
+    public int rank(Key key) {
+        if (key == null)
+            throw new IllegalArgumentException("called rank() with invalid argument: ");
+
+        return rank(root, key);
+    }
+
+    private int rank(Node x, Key key) {
+        if (x == null) return 0;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0)
+            return rank(x.left, key);
+        else if (cmp > 0)
+            return 1 + size(x.left) + rank(x.right, key);       // left 的 size + right 的 size
+        else
+            return size(x.left);
+    }
 
     /*
     ** 测试 查询
@@ -205,5 +266,8 @@ public class BST<Key extends Comparable<Key>, Value> {
         StdOut.println(time);
         StdOut.println(st.min());
         StdOut.println(st.max());
+        StdOut.println(st.select(19));
+        StdOut.println(st.rank("worst"));
+        StdOut.println(st.floor("aga"));
     }
 }
