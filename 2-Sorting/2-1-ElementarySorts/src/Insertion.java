@@ -5,6 +5,9 @@ import edu.princeton.cs.algs4.Stopwatch;
 /**
  * Created by HJKLI on 2016/11/13.
  * 插入排序 也称 冒泡排序
+ *
+ * ../algs4-data/tiny.txt
+ * ../algs4-data/words3.txt
  */
 public class Insertion {
 
@@ -51,8 +54,8 @@ public class Insertion {
 
     public static void main(String[] args) {
 
-//        String[]  s     = In.readStrings(args[0]);
-        Integer[]  s     = {39, 20, 40, 1, 2, 3, 4, 5, 6, 7};
+        String[]  s     = In.readStrings(args[0]);
+//        Integer[]  s     = {39, 20, 40, 1, 2, 3, 4, 5, 6, 7};
         Stopwatch timer = new Stopwatch();
 
         sort(s);

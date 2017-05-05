@@ -12,6 +12,8 @@ import java.util.Comparator;
  *          min = j
  *     }
  *     exch(a, i, min)
+ *     x x x x x x x x x x x x x
+ *       j j j j j j j j j j j j
  * }
  */
 public class Selection {
