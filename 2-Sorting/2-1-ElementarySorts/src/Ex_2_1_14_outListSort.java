@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  * Created by HJKLI on 2016/11/17.
- * 出列排序
+ * 出列排序 , 限制 只能查看最上面两个，交换最上面两张或 交换 最上面 和最下面
  */
 public class Ex_2_1_14_outListSort {
 

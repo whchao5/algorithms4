@@ -1,4 +1,5 @@
 
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stopwatch;
@@ -109,9 +110,44 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
+
+    /*
+    ** 删除 最小值
+     */
+    public void deleteMin() {
+        deleteMin(root);
+    }
+
+    /*
+    ** 递归实现 ： 首先， x 的 left 和 right 都小于 x 的父级， 所以使用right代替是对的，  哪怕 right is null
+     */
+    private Node deleteMin(Node x) {
+        if (x.left == null)
+            return x.right;             // x.left = x.left.right; && x.lift = x.left.left
+        x.left = deleteMin(x.left);
+        x.size = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+
+    /*
+    ** 删除 最大值
+     */
+    public void deleteMax() {
+        deleteMax(root);
+    }
+
+    private Node deleteMax(Node x) {
+        if (x.right == null)
+            return x.left;          // x.right = x.right.left;
+        x.right = deleteMax(x.right);
+        x.size = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+
+
     /*
     * 输入 key 删除   32.2.42 应对大规模数据
-
+    */
     public void delete(Key key) {
         if (key == null)
             throw new IllegalArgumentException("argument to delete() is null");
@@ -120,6 +156,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     private Node delete(Node x, Key key) {
+        if (x == null) return null;
 
         int cmp = key.compareTo(x.key);
 
@@ -128,10 +165,19 @@ public class BST<Key extends Comparable<Key>, Value> {
         } else if (cmp < 0) {
             x.left = delete(x.left, key);
         } else {
-            // TODO 没写
+            if  (x.left == null) return x.right;
+            if (x.right == null) return x.left;
+            Node t = x;
+
+            x = min(t.right);               // 获得 x.right 最小 node，
+            x.right = deleteMin(x.right);       //  删除 x.right 最下的 node
+            x.left = t.left;
         }
+
+        x.size = size(x.left) + size(x.right) + 1;
+
         return x;
-    }*/
+    }
 
 
     /*
@@ -140,27 +186,46 @@ public class BST<Key extends Comparable<Key>, Value> {
     public Key floor(Key key) {
         if (key == null) throw new IllegalArgumentException("argument to floor() is null");
         if (isEmpty()) throw new NoSuchElementException("called floor() with empty symbol table");
-
-        return floor(root, key).key;
+        Node itmes = floor(root, key);
+        if (itmes == null)
+            return null;
+        return itmes.key;
     }
 
     private Node floor(Node x, Key key) {
         if (x == null) return null;
         int cmp = key.compareTo(x.key);
         if (cmp == 0) return x;
-        if (cmp < 0) {
-            Node s = floor(x.left, key);         // 添加 left 最小处理
-            if (s != null)
-                return s;
-            else
-                return x;
-        }
+        if (cmp < 0)  return floor(x.left, key);         // 添加 left 最小处理
 
         Node t = floor(x.right, key);
         if (t != null)
             return t;
         else
             return x;
+    }
+
+    public Key ceiling(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
+        if (isEmpty()) throw new NoSuchElementException("called ceiling() with empty symbol table");
+        Node items = ceiling(root, key);
+
+        return items.key;
+    }
+
+    private Node ceiling(Node x, Key key) {
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) return x;
+        if (cmp < 0) {
+            Node t = ceiling(x.left, key);         // 添加 left 最小处理
+            if (t != null)
+                return t;
+            else
+                return x;
+        }
+
+        return ceiling(x.right, key);
     }
 
 //    private Node floor_two(Node x, Key key) {
@@ -196,7 +261,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x.right == null)
             return x;
         else
-            return min(x.right);
+            return max(x.right);
     }
 
     /*
@@ -244,6 +309,51 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     /*
+    ** 遍历数据 . 一种方式
+     */
+
+    public void print() {
+        print(root);
+    }
+
+
+    private void print(Node x) {
+        if (x == null)
+            return;
+        print(x.left);
+        StdOut.println(x.key);
+        print(x.right);
+    }
+
+    /*
+    ** 遍历数据, 睇二种方式
+     */
+    public Iterable<Key> keys() {
+        return keys(min(), max());
+    }
+
+    private Iterable<Key> keys(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
+        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
+
+        Queue<Key> queue = new Queue<Key>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
+
+    /*
+    ** 和print 理念一样，递归 left && right
+     */
+    private void keys(Node x, Queue<Key> queue, Key lo, Key hi) {
+        if (x == null) return;
+        int cmplo = lo.compareTo(x.key);  // -1
+        int cmphi = hi.compareTo(x.key);    // 1
+        if (cmplo < 0) keys(x.left, queue, lo, hi);     // 有left 就迭代
+        if (cmplo <= 0 && cmphi >= 0) queue.enqueue(x.key);
+        if (cmphi > 0) keys(x.right, queue, lo, hi);   // 有right 就迭代
+    }
+
+    /*
     ** 测试 查询
      */
     public static void main(String[] args) {
@@ -264,10 +374,23 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         double time = timer.elapsedTime();
         StdOut.println(time);
+
         StdOut.println(st.min());
         StdOut.println(st.max());
-        StdOut.println(st.select(19));
-        StdOut.println(st.rank("worst"));
-        StdOut.println(st.floor("aga"));
+//        StdOut.println(st.select(19));
+//        StdOut.println(st.rank("worst"));
+//        StdOut.println(st.floor("aga"));
+//        StdOut.println(st.floor("worss"));
+//        StdOut.println(st.ceiling("worss"));
+
+//        st.delete("age");
+//        StdOut.println(st.floor("aga"));
+        StdOut.println(" ================================ ");
+        st.print();
+        StdOut.println(" ================================ ");
+
+        for (String s : st.keys()) {
+            StdOut.println(s + " " + st.get(s));
+        }
     }
 }
