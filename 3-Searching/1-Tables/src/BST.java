@@ -1,7 +1,6 @@
-
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stopwatch;
 
 import java.util.NoSuchElementException;
@@ -165,12 +164,12 @@ public class BST<Key extends Comparable<Key>, Value> {
         } else if (cmp < 0) {
             x.left = delete(x.left, key);
         } else {
-            if  (x.left == null) return x.right;
+            if (x.left == null) return x.right;
             if (x.right == null) return x.left;
             Node t = x;
 
-            x = min(t.right);               // 获得 x.right 最小 node，
-            x.right = deleteMin(x.right);       //  删除 x.right 最下的 node
+            x = min(t.right);               // 获得 x.right 最小 node， node 代替 x
+            x.right = deleteMin(x.right);       //  删除 x.right 最下的 node, 返回 node 加入 x.right
             x.left = t.left;
         }
 
@@ -196,7 +195,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x == null) return null;
         int cmp = key.compareTo(x.key);
         if (cmp == 0) return x;
-        if (cmp < 0)  return floor(x.left, key);         // 添加 left 最小处理
+        if (cmp < 0) return floor(x.left, key);         // 添加 left 最小处理
 
         Node t = floor(x.right, key);
         if (t != null)

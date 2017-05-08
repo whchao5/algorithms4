@@ -1,18 +1,16 @@
-
-
-import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  * 文本 频率计数器
- *
+ * <p>
  * 符号表， 基于顺序查看 顺序搜索
  * 2017、4/22 23:12
- *
+ * <p>
  * 2 ../algs4-data/tinyTale.txt
- *
+ * <p>
  * 0 ../algs4-data/tale.txt
  * 1 ../algs4-data/tale_two.txt
  * 3 ../algs4-data/leipzig1M.txt

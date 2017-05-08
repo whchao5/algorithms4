@@ -1,7 +1,6 @@
-
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stopwatch;
 
 /**
@@ -11,7 +10,7 @@ import edu.princeton.cs.algs4.Stopwatch;
  * SequentialSearchST
  * <p>
  * 2 ../algs4-data/tinyTale.txt
- *
+ * <p>
  * ../algs4-data/tale.txt        9.523   26.841
  * ../algs4-data/tale_two.txt
  */
@@ -87,6 +86,7 @@ public class SequentialSearchST<Key, Value> {
 
     /**
      * 从表中 删除 key 以及对于的 value
+     *
      * @param key
      */
     public void delete(Key key) {
