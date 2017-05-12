@@ -238,7 +238,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             queue.enqueue(keys[i]);
         }
         if (contains(hi))
-            queue.enqueue(keys[rank(hi)]);
+                queue.enqueue(keys[rank(hi)]);
         return queue;
     }
 

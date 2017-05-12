@@ -77,6 +77,24 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    // 迭代
+    public Value get_iterate(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to get_iterate() is null");
+        Node x = root;
+
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+
+            if (cmp > 0)
+                x = x.right;
+            else if (cmp < 0)
+                x = x.left;
+            else
+                return x.val;
+        }
+        return null;
+    }
+
 
     /*
     **
@@ -85,9 +103,9 @@ public class BST<Key extends Comparable<Key>, Value> {
     * ·删除指定的关键字(及其关联值)这个符号表如果指定的值是。
      */
     public void put(Key key, Value val) {
-        if (val == null) throw new IllegalArgumentException("calledput() with a null key");
-        if (key == null) {
-
+        if (key == null) throw new IllegalArgumentException("calledput() with a null key");
+        if (val == null) {
+            delete(key);
             return;
         }
         root = put(root, key, val);
@@ -108,6 +126,32 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         return x;
     }
+
+    /*
+    ** 用 迭代要写一个程序 维护 root.size 的值
+
+    public void put_iterate(Key key, Value val) {
+        if (key == null) throw new IllegalArgumentException("calledput() with a null key");
+        if (val == null) {
+            delete(key);
+            return;
+        }
+
+        Node x = root, parent = null;
+        while (x != null) {
+            parent = x;
+            int cmp = key.compareTo(x.key);
+            if (cmp > 0)
+                x = x.right;
+            else if (cmp < 0)
+                x = x.left;
+            else {
+                x.val = val;
+                return;
+            }
+        }
+    }
+    */
 
 
     /*
@@ -385,11 +429,11 @@ public class BST<Key extends Comparable<Key>, Value> {
 //        st.delete("age");
 //        StdOut.println(st.floor("aga"));
         StdOut.println(" ================================ ");
-        st.print();
+//        st.print();
         StdOut.println(" ================================ ");
 
-        for (String s : st.keys()) {
-            StdOut.println(s + " " + st.get(s));
-        }
+//        for (String s : st.keys()) {
+//            StdOut.println(s + " " + st.get_iterate(s));
+//        }
     }
 }
