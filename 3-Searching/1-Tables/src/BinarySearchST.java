@@ -84,6 +84,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         // 创建 新 Key && Value
         if (n == keys.length) resize(keys.length * 2);
 
+        // 找到 j + 1 位， 其余向后移一位
         for (int j = n; j > i; j--) {
             keys[j] = keys[j - 1];
             vals[j] = vals[j - 1];
