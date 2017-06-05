@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
@@ -8,6 +9,8 @@ import edu.princeton.cs.algs4.SequentialSearchST;
  * Created by W on 2017/5/19.
  * http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
  * 单链表 哈希表
+ * <p>
+ * ../algs4-data/tinyST.txt
  */
 public class SeparateChainingHashST<Key, Value> {
     private static final int INIT_CAPACITY = 4;
@@ -22,6 +25,7 @@ public class SeparateChainingHashST<Key, Value> {
 
     public SeparateChainingHashST(int m) {
         this.m = m;
+        st = (SequentialSearchST<Key, Value>[]) new SequentialSearchST[m];
         for (int i = 0; i < m; i++) {
             st[i] = new SequentialSearchST<Key, Value>();
         }
@@ -61,6 +65,19 @@ public class SeparateChainingHashST<Key, Value> {
         return get(key) != null;
     }
 
+    // 删除
+    public void delete(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+
+        int i = hash(key);
+        if (st[i].contains(key))
+            n--;
+        st[i].delete(key);
+
+        if (m > INIT_CAPACITY && n <= 2 * m)
+            resize(m / 2);
+    }
+
     private void resize(int chains) {
         SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST<Key, Value>(chains);
 
@@ -98,6 +115,31 @@ public class SeparateChainingHashST<Key, Value> {
             }
         }
         return queue;
+    }
+
+
+    public static void main(String[] args) {
+        In arr = new In(args[0]);
+
+        SeparateChainingHashST<String, Integer> st = new SeparateChainingHashST<String, Integer>();
+
+        int i = 0;
+        while (!arr.isEmpty()) {
+            String key = arr.readString();
+            st.put(key, i);
+            ++i;
+        }
+        // print keys
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.get(s));
+
+        StdOut.println(" ================================ ");
+
+        st.delete("H");
+
+        // print keys
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.get(s));
     }
 
 }
