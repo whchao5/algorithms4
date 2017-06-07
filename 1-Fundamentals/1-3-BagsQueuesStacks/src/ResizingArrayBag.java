@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Created by HJKLI on 2016/8/31.
+ * 可调整 array 的包
  */
 public class ResizingArrayBag<Item> implements Iterable<Item> {
     private Item[] a;
