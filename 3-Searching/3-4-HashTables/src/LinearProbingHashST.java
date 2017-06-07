@@ -54,5 +54,5 @@ public class LinearProbingHashST<Key, Value> {
 
     private int hash(Key key) {
         return (key.hashCode() & 0x7fffffff) % m;
-    }
+    } // 获得非负整数
 }
