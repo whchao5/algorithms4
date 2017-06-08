@@ -78,6 +78,8 @@ public class SeparateChainingHashST<Key, Value> {
             resize(m / 2);
     }
 
+    //哈希表的大小调整为具有给定链的数量，
+    // 重复所有的钥匙  , 将 m 值扩大
     private void resize(int chains) {
         SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST<Key, Value>(chains);
 
