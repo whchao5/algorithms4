@@ -29,6 +29,19 @@ public class LinearProbingHashST<Key, Value> {
     }
 
     /*
+    ** get
+     */
+    public Value get(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to get() is null");
+        for (int i = hash(key); keys[i] != null; i = (i + 1) % m) {
+            if (keys[i].equals(key)) {
+                return vals[i];
+            }
+        }
+        return null;
+    }
+
+    /*
     ** 没有 key 新建 一个key value， 有key 覆盖 value
      */
     public void put(Key key, Value val) {
