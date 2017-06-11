@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  * Created by HJKLI on 2017/5/8.
- * 红黑树 , 2-3 , 3-4
+ * 红黑树 , 2-3 , 3-4 , 将 树 和 维护的 tree 分离
  *
  * ../algs4-data/tinyTale.txt
  * ../algs4-data/tale.txt
