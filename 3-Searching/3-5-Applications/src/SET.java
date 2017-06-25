@@ -4,7 +4,7 @@ import java.util.TreeSet;
 
 /**
  * Created by W on 2017/6/11.
- * 有序二叉树
+ * 有序二叉树 的封装
  */
 public class SET {
 }

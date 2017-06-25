@@ -24,7 +24,8 @@ public class LookupCSV {
         ST<String, String> st = new ST<String, String>();
 
         In in = new In(args[0]);
-        while (!in.isEmpty()) {
+//        while (!in.isEmpty()) {
+        while (in.hasNextLine()) {
             String line = in.readLine();
             String[] tokens = line.split(",");
             String key = tokens[KeyField];
@@ -33,9 +34,9 @@ public class LookupCSV {
             st.put(key, val);
         }
 
-        for (String itemSt : st.keys()) {
-            StdOut.println(itemSt);
-        }
+//        for (String itemSt : st.keys()) {
+//            StdOut.println(itemSt);
+//        }
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
             if (st.contains(s)) {
