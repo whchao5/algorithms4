@@ -20,6 +20,10 @@ public class DeDup {
 
         In in = new In(args[0]);
         StdOut.println(in.readInt());
+        StdOut.println(in.readInt());
+        StdOut.println(in.readInt());
+        StdOut.println(in.readInt());
+        StdOut.println(in.readInt());
 
         while (!StdIn.isEmpty()) {
             String key = StdIn.readAll();
