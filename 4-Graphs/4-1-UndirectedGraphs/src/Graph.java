@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  * Created by W on 2017/7/6.
@@ -8,7 +9,11 @@ import edu.princeton.cs.algs4.StdOut;
  * Graph
  *
  * ../algs4-data/tinyG.txt
+ * ../algs4-data/mediumG.txt
+ *  ../algs4-data/largeG.txt
  */
+
+
 public class Graph {
 
     private static final String NEWLINE = System.getProperty("line.separator");
@@ -31,7 +36,7 @@ public class Graph {
     // 初始化图形从指定的输入流。
     public Graph(In in) {
         this(in.readInt());
-        E = in.readInt();
+        int E = in.readInt();
 
         for (int i = 0; i < E; i++) {
             int v = in.readInt();
@@ -48,7 +53,16 @@ public class Graph {
     public void addEdge(int v, int w) {
         adj[v].add(w);
         adj[w].add(v);
-//        E++;
+        E++;
+    }
+
+    /**
+     *返回顶点{ @code v }的程度。
+     * @param v
+     */
+    public int degree(int v) {
+        validateVertex(v);
+        return adj[v].size();
     }
 
     /*
