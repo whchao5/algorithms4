@@ -9,6 +9,7 @@ import edu.princeton.cs.algs4.Graph;
  *
  * ../algs4-data/tinyG.txt 0
  * ../algs4-data/tinyG.txt 9
+ * ../algs4-data/tinyCG.txt 0
  *
  */
 public class DepthFirstSearch {
