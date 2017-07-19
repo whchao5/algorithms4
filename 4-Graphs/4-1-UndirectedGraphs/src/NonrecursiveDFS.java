@@ -2,6 +2,7 @@ import edu.princeton.cs.algs4.*;
 import edu.princeton.cs.algs4.Graph;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 
 /**
@@ -27,6 +28,10 @@ public class NonrecursiveDFS {
             adj[v] = G.adj(v).iterator();   // 强制转换
         }
 
+        // 深度优先搜索使用显式的堆栈
+        Stack<Integer> stack = new Stack<Integer>();
+        marked[s]  = true;
+        stack.push(s);
 
 //        while ()
     }
@@ -42,5 +47,12 @@ public class NonrecursiveDFS {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
         }
+    }
+
+    public static void main(String[] args) {
+        In    in = new In(args[0]);
+        Graph G  = new Graph(in);
+        int   s  = Integer.parseInt(args[1]);
+        NonrecursiveDFS dfs = new NonrecursiveDFS(G, s);
     }
 }
