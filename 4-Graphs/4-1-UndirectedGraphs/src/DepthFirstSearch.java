@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.Graph;
 
 /**
  * Created by HJKLI on 2017/7/14.
- * 深度优先遍历
+ * 深度优先遍历 depth-first search in a graph DFS
  *
  * ../algs4-data/tinyG.txt 0
  * ../algs4-data/tinyG.txt 9
