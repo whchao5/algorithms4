@@ -48,7 +48,7 @@ public class DepthFirstPaths {
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
 
-    // 数据结构入下
+    // 数据结构 如下
     // edgeTo[]
     /*
      1 | 2
@@ -61,7 +61,7 @@ public class DepthFirstPaths {
         validateVertex(v);
         if (!hasPathTo(v))
             return null;
-        Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<Integer>(); // 将路径 排列成 先进后出
         for (int x = v; x != s; x = edgeTo[x])
             path.push(x);
         path.push(s);

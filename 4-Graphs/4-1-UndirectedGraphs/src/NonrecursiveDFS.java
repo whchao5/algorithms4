@@ -35,7 +35,7 @@ public class NonrecursiveDFS {
         stack.push(s);
 
         while (!stack.isEmpty()) {      // 不空
-            int v = stack.peek();       //
+            int v = stack.peek();       // 栈的值
 
             if (adj[v].hasNext()) {
                 int w = adj[v].next();
