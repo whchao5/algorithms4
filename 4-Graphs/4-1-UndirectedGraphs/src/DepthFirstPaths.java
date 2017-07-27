@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.Graph;
  *
  * ../algs4-data/tinyCG.txt
  * ../algs4-data/tinyCG.txt 0
+ * ../algs4-data/mediumG.txt 0
  */
 public class DepthFirstPaths {
 
@@ -36,6 +37,7 @@ public class DepthFirstPaths {
         }
     }
 
+    // 返回 一个源顶点的 状态
     public boolean hasPathTo(int v) {
         validateVertex(v);
         return marked[v];
