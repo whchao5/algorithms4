@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.Graph;
  *
  * ../algs4-data/tinyCG.txt
  * ../algs4-data/tinyCG.txt 0
+ * ../algs4-data/tinyCG.txt 5
  * ../algs4-data/mediumG.txt 0
  */
 public class DepthFirstPaths {
@@ -17,6 +18,11 @@ public class DepthFirstPaths {
     private int count;
     private final int s;
 
+    /**
+     * 初始化
+     * @param G 数组表示的 图结构
+     * @param s 表示从那个点开始查找
+     */
     public DepthFirstPaths(Graph G, int s) {
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
@@ -74,7 +80,7 @@ public class DepthFirstPaths {
     public static void main(String[] args) {
         In in = new In(args[0]);
         Graph G = new Graph(in);
-        int s = Integer.parseInt(args[1]);
+        int s = Integer.parseInt(args[1]);          // 表示从那个点开始查找
         DepthFirstPaths dfs = new DepthFirstPaths(G, s);
 
         for (int v = 0; v < G.V(); v++) {
