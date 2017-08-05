@@ -10,6 +10,7 @@ import edu.princeton.cs.algs4.Graph;
  * ../algs4-data/tinyCG.txt 0
  * ../algs4-data/tinyCG.txt 5
  * ../algs4-data/mediumG.txt 0
+ * ../algs4-data/tinyG.txt 0
  */
 public class DepthFirstPaths {
 
