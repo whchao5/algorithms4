@@ -1,3 +1,10 @@
+
+
+import edu.princeton.cs.algs4.ST;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 /*
 * 符号图 st
 *
@@ -5,11 +12,15 @@
 * 符号表 st ， 键为 String， 值 int
 * 数组 keys[]   反向索引，保持每个顶点索引对于的顶点名
 * Graph 图 G ， 使用索引引用图中的顶点
+*
+*  ../algs4-data/movies.txt "/"
+*  ../algs4-data/routes.txt " "
+*  ../algs4-data/moviestiny.txt
+*  ../algs4-data/moviesG.txt
+*  ../algs4-data/moviestopGrossing.txt
+*
  */
 
-import edu.princeton.cs.algs4.ST;
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
 
 public class SymbolGraph {
 
@@ -41,7 +52,7 @@ public class SymbolGraph {
         }
 
         G = new Graph(st.size());
-        in = new In(stream);                            // 第二遍
+        in = new In(stream);                            // 第二遍, 生成关系树
         while (in.hasNextLine()) {
             String[]  a = in.readLine().split(sp);      // 将每一行的顶点和该行的其他顶点相连
 
@@ -49,6 +60,52 @@ public class SymbolGraph {
             for (int i = 1; i < a.length; i++) {
                 G.addEdge(v, st.get(a[i]));
             }
+        }
+    }
+
+    // 查看是否有
+    public boolean contains(String s) {
+        return st.contains(s);
+    }
+
+    // 获取 value
+    public int index(String s) {
+        return st.get(s);
+    }
+
+    // 获取名字
+    public String name(int v) {
+        return keys[v];
+    }
+
+    public Graph G() {
+        return G;
+    }
+    public Graph graph() {
+        return G;
+    }
+
+
+    // 测试用例
+    public static void main(String[] args) {
+        String filename  = args[0];
+        String delimiter = args[1];
+
+        SymbolGraph sg = new SymbolGraph(filename, delimiter);
+
+        Graph graph = sg.graph();
+        while (StdIn.hasNextLine()) {
+            String source = StdIn.readLine();
+            if (sg.contains(source)) {
+                int s = sg.index(source);
+                for (int v : graph.adj(s)) {
+                    StdOut.println(" " + sg.name(v));
+                }
+            }
+            else {
+                StdOut.println("input not contain '" + source + "'");
+            }
+
         }
     }
 }
