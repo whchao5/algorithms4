@@ -22,14 +22,14 @@ public class CC {
     private boolean[] marked;
 //    private int[] edgeTo;
     private int[] id;
-
+    private int[] size;    // size[id] 记录联通分量的数量
     private int count;
 
     public CC(Graph G) {
         int v = G.V();
-        marked = new boolean[v];
-        id = new int[v];
-
+        this.marked = new boolean[v];
+        this.id = new int[v];
+        this.size = new int[v];
         for (int s = 0; s < v; s++) {
             if (!marked[s]) {
                 dfs(G, s);
@@ -41,6 +41,7 @@ public class CC {
     private void dfs(Graph G, int v) {
         marked[v] = true;
         id[v] = count;
+        size[count]++;
         for (int w : G.adj(v)) {
             if (!marked[w]) {
                 dfs(G, w);
@@ -58,6 +59,14 @@ public class CC {
     public int id(int v) {
         validateVertex(v);
         return id[v];
+    }
+
+
+    public int size(int v) {
+        return size[id[v]];
+    }
+    public int ccSize(int v) {
+        return size[v];
     }
 
     public int count() {
@@ -81,9 +90,12 @@ public class CC {
             components[cc.id[v]].add(v);
         }
 
-//        for (int i = 0; i < M; i++) {
-//            for ()
-//        }
+        for (int i = 0; i < M; i++) {
+            for (int v : components[i]) {
+                StdOut.print(v + " ");
+            }
+            StdOut.println("  count = " + cc.ccSize(i) );
+        }
 
     }
 }

@@ -1,5 +1,5 @@
 
-import edu.princeton.cs.algs4.Graph;
+//import edu.princeton.cs.algs4.Graph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -24,13 +24,14 @@ public class Cycle {
         }
     }
 
+    // u 是 图首
     private void dfs(Graph G, int v, int u) {
 
         marked[v] = true;
         for (int w : G.adj(v)) {
             if (!marked[w]) {
                 dfs(G, w, v);
-            } else if (w != v) {
+            } else if (w != u) {
                 hasCycle = true;
             }
         }
