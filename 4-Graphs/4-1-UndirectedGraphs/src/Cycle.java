@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 /*
-** G 是无环图
+** G 是 有环图
 *
 *  ../algs4-data/tinyG.txt
 *
@@ -24,7 +24,8 @@ public class Cycle {
         }
     }
 
-    // u 是 图首
+    // u 是 图首, 和 w 比较
+
     private void dfs(Graph G, int v, int u) {
 
         marked[v] = true;
