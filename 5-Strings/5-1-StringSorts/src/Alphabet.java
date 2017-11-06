@@ -14,15 +14,22 @@ public class Alphabet {
 
 
     /**
-     *  The lowercase alphabet { a, b, c, ..., z }.
+     * The lowercase alphabet { a, b, c, ..., z }.
      */
     public static final Alphabet LOWERCASE = new Alphabet("abcdefghijklmnopqrstuvwxyz");
 
-    private char[] alphabet;     // 字母表里的 字符
-    private int[] inverse;      // // 倒转
-    private final int R;         //alphabe的基数
-    /**
 
+
+    /**
+     *  The base-64 alphabet (64 characters).
+     */
+    public static final Alphabet BASE64 = new Alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+
+    private       char[] alphabet;     // 字母表里的 字符
+    private       int[]  inverse;      // // 倒转
+    private final int    R;         //alphabe的基数
+
+    /**
      * 根据 alpha 中的字符创建一个新的字符表
      *
      * @param alpha
@@ -72,9 +79,10 @@ public class Alphabet {
     }
 
     // c 在字母表中吗
+    // 使用 char 隐式转换 int 类型
     public boolean contains(char c) {
 
-        return true;
+        return inverse[c] != -1;
     }
 
     // 字符表的数量
@@ -82,22 +90,41 @@ public class Alphabet {
         return this.R;
     }
 
+    public int radix() {
+        return this.R;
+    }
+
     // 表示 一个索引所需的位数
     public int loR() {
 
-        return 1;
+        int lgR = 0;
+        for (int t = R - 1; t >= 1; t /= 2)
+            lgR++;
+
+        return lgR;
     }
 
     // 将 s 转换为 R 进制的整数
     public int[] toIndices(String s) {
 
-        return null;
+        char[] source = s.toCharArray();
+        int[] target = new int[s.length()];
+
+        for (int i = 0; i < source.length; i++)
+            target[i] = toIndex(source[i]);
+
+        return target;
     }
 
     // 将R 进制的整数 转换 为 基于该字母表的字符串
     public String toChars(int[] indices) {
 
-        return "00";
+        StringBuilder s = new StringBuilder(indices.length);
+        for (int i = 0; i < indices.length; i++) {
+            s.append(toChar(i));
+        }
+
+        return s.toString();
     }
 
     public static void main(String[] args) {
@@ -105,8 +132,16 @@ public class Alphabet {
 
         Alphabet lowercase = Alphabet.LOWERCASE;
 
+        char dow = 'e';
 
-        StdOut.println(lowercase.toIndex('b'));
+        int k = (int) dow;
+
+        StdOut.println(lowercase.toIndex('y'));
+        StdOut.println(lowercase.loR());
+
+        int[]  encoded1 = Alphabet.BASE64.toIndices("NowIsTheTimeForAllGoodMen");
+        String decoded1 = Alphabet.BASE64.toChars(encoded1);
+        StdOut.println(decoded1);
     }
 
 }
