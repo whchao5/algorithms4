@@ -36,7 +36,8 @@ public class LSD {
 
             // 将元素分类
             for (int i = 0; i < N; i++) {
-                aux[count[arr[i].charAt(d)]++] = arr[i];
+                int index = arr[i].charAt(d);
+                aux[count[index]++] = arr[i];
             }
 
             // 回写
