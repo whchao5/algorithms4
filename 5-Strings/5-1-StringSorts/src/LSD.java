@@ -26,7 +26,7 @@ public class LSD {
 
             int[] count = new int[R + 1];   // 计算出现频率的次数
             for (int i = 0; i < N; i++) {
-                count[arr[i].charAt(d) + 1]++;
+                count[arr[i].charAt(d) + 1]++;  // 必须向后移一位， aux 的索引从 0 开始算起
             }
 
             // 将频率转换为索引
