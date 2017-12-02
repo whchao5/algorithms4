@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 
 /*
-** 计时器
+** 计时器  P110
 *
 *   100000000
  */

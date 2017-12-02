@@ -3,6 +3,12 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
 
+/*
+** 多个 数 相加
+*
+*  ../algs4-data/1Kints.txt
+*  ../algs4-data/4Kints.txt
+ */
 public class ThreeSumFast {
 
     public static int count(int[] a) {
@@ -24,7 +30,11 @@ public class ThreeSumFast {
         In in = new In(args[0]);
         int[] a = in.readAllInts();
 
+        Stopwatch stopwatch = new Stopwatch();
         int count = count(a);
+
+        StdOut.println(stopwatch.elapsedTime());
+
 
         StdOut.println(count);
     }
