@@ -157,7 +157,8 @@ public class LinearProbingHashST<Key, Value> {
     public static void main(String[] args) {
         In arr = new In(args[0]);
 
-        LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>();
+//        LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>();
+        var st = new LinearProbingHashST<String, Integer>();
 
         int i = 0;
         while (!arr.isEmpty()) {
