@@ -42,8 +42,10 @@ public class Alphabet {
             char c = alpha.charAt(i);
 
             // 如果有相同的字母 报错
-            if (unicode[c])
+            if (unicode[c]) {
                 throw new IllegalArgumentException("Illegal alphabet: repeated character = '" + c + "'");
+            }
+
             unicode[c] = true;
         }
 
