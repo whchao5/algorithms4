@@ -142,6 +142,7 @@ public class Alphabet {
 
         StdOut.println(lowercase.toIndex('y'));
         StdOut.println(lowercase.loR());
+        StdOut.println(lowercase.R());
 
         int[]  encoded1 = Alphabet.BASE64.toIndices("NowIsTheTimeForAllGoodMen");
         String decoded1 = Alphabet.BASE64.toChars(encoded1);
