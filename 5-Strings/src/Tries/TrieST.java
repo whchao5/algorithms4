@@ -74,13 +74,14 @@ public class TrieST<Value> {
     }
 
     // 返回前缀相同的key
+    // 查找所有键
     public Iterable<String> keysWithPrefix(String prefix) {
         Queue<String> q = new Queue<>();
 
         Node node = get(root, prefix, 0); // 获取指点的节点
 
-//        collect(node,new StringBuilder(prefix), q);
-        collectNo(node,prefix, q);
+        collect(node,new StringBuilder(prefix), q);
+//        collectNo(node,prefix, q);
         return q;
     }
 
@@ -110,6 +111,41 @@ public class TrieST<Value> {
     }
 
 
+    // 通配符匹配
+    public Iterable<String> keysThatMatch(String pattern) {
+
+        Queue<String> q = new Queue<>();
+        Node node = get(root, pattern, 0); // 获取指点的节点
+        collect(node, new StringBuilder(), pattern,  q);
+
+        return q;
+    }
+
+
+    private void collect(Node x, StringBuilder pre, String pattern,  Queue<String> results) {
+
+        int d = pre.length();
+        if (x == null)
+            return;
+
+        if (x.val != null && d == pattern.length())
+            results.enqueue(pre.toString());
+
+        if (d == pattern.length())
+            return;
+
+        char next = pattern.charAt(d);
+
+        for (char c = 0; c < R; c++) {
+            if (next == '.' || next == c)
+                pre.append(next);
+                collect(x.next[c], pre, pattern, results);
+                pre.deleteCharAt(pre.length() - 1);
+        }
+
+    }
+
+
     public static void main(String[] args) {
         TrieST<Integer> st = new TrieST<Integer>();
 
@@ -125,5 +161,10 @@ public class TrieST<Value> {
             }
             StdOut.println();
         }
+
+
+        StdOut.println("keysThatMatch(\".he.l.\"):");
+        for (String s : st.keysThatMatch(".he.l."))
+            StdOut.println(s);
     }
 }
