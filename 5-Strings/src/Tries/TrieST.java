@@ -4,6 +4,8 @@ import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.ArrayList;
+
 /**
  * 单词查找树
  *
@@ -115,15 +117,14 @@ public class TrieST<Value> {
     public Iterable<String> keysThatMatch(String pattern) {
 
         Queue<String> q = new Queue<>();
-        Node node = get(root, pattern, 0); // 获取指点的节点
-        collect(node, new StringBuilder(), pattern,  q);
-
+        collect(root, new StringBuilder(), pattern,  q);
         return q;
     }
 
-
+    // 通配符匹配
     private void collect(Node x, StringBuilder pre, String pattern,  Queue<String> results) {
 
+        // 过滤 x
         int d = pre.length();
         if (x == null)
             return;
@@ -137,10 +138,11 @@ public class TrieST<Value> {
         char next = pattern.charAt(d);
 
         for (char c = 0; c < R; c++) {
-            if (next == '.' || next == c)
-                pre.append(next);
+            if (next == '.' || next == c) {
+                pre.append(c);
                 collect(x.next[c], pre, pattern, results);
                 pre.deleteCharAt(pre.length() - 1);
+            }
         }
 
     }
@@ -149,10 +151,25 @@ public class TrieST<Value> {
     public static void main(String[] args) {
         TrieST<Integer> st = new TrieST<Integer>();
 
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
+//        for (int i = 0; !StdIn.isEmpty(); i++) {
+//            String key = StdIn.readString();
+//            st.put(key, i);
+//        }
+
+        ArrayList<String> lists = new ArrayList<>();
+
+        lists.add("iosx");
+        lists.add(".iox");
+        lists.add(".io.s");
+        lists.add("iosxwfx");
+        lists.add("ioxsf.io.fds");
+        lists.add("efwids.io.fdsji");
+
+
+        for (int i = 0; i < lists.size(); i++) {
+            st.put(lists.get(i), i);
         }
+
 
         StdOut.println(st.get("key"));
         if (st.size() < 100) {
@@ -163,8 +180,8 @@ public class TrieST<Value> {
         }
 
 
-        StdOut.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
+        StdOut.println("keysThatMatch(\".io.\"):");
+        for (String s : st.keysThatMatch(".io."))
             StdOut.println(s);
     }
 }

@@ -1,5 +1,10 @@
 package StringSearch;
 
+
+/**
+ *  暴力查询
+ */
+
 public class Search {
 
     public static void main(String[] args) {
