@@ -23,7 +23,7 @@ import edu.princeton.cs.algs4.StdOut;
  *  *  pattern:                        rabrabracad
  *  *
  *  *  % java KMP abacad abacadabrabracabracadabrabrabracad
- *  *  text:    abacadabrabracabracadabrabrabracad
+ *  *  text:    abacad abacadabrabracabracadabrabrabracad
  *  *  pattern: abacad
  */
 
