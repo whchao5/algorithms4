@@ -8,6 +8,9 @@ import java.util.Stack;
 
 /**
  * Created by HJKLI on 2016/8/30.
+ * 双栈算术表达式
+ *
+ *  (1+((2+3)*(4*5)))
  */
 public class Evaluate {
     public static void main(String[] args) {
